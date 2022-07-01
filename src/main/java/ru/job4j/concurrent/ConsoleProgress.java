@@ -11,9 +11,8 @@ public class ConsoleProgress implements Runnable {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
-            System.out.print("\r Loading: " + chars[i]);
-            i++;
-            if (i == 4) {
+            System.out.print("\r Loading: " + chars[i++]);
+            if (i == chars.length) {
                 i = 0;
             }
         }
