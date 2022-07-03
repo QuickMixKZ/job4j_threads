@@ -10,7 +10,7 @@ public final class FileSaver {
         this.file = file;
     }
 
-    public void saveContent(String content) {
+    public synchronized void saveContent(String content) {
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file)))) {
             for (int i = 0; i < content.length(); i += 1) {
                 writer.write(content.charAt(i));
