@@ -23,7 +23,7 @@ public final class ParseFile {
         StringBuilder output = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)))) {
             int data;
-            while ((data = reader.read()) >= 0) {
+            while ((data = reader.read()) != -1) {
                 if (filter.test((char) data)) {
                     output.append((char) data);
                 }
