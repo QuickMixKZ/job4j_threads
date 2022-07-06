@@ -10,27 +10,15 @@ public class UserStorage {
     private final ConcurrentHashMap<Integer, User> users = new ConcurrentHashMap<>();
 
     public synchronized boolean add(User user) {
-        boolean result = users.get(user.getId()) == null;
-        if (result) {
-            users.put(user.getId(), user);
-        }
-        return result;
+        return users.putIfAbsent(user.getId(), user) == null;
     }
 
     public synchronized boolean update(User user) {
-        boolean result = users.get(user.getId()) != null;
-        if (result) {
-            users.put(user.getId(), user);
-        }
-        return result;
+        return users.replace(user.getId(), users.get(user.getId()), user);
     }
 
     public synchronized boolean delete(User user) {
-        boolean result = users.get(user.getId()) != null;
-        if (result) {
-            users.remove(user.getId());
-        }
-        return result;
+        return users.remove(user.getId(), user);
     }
 
     public synchronized boolean transfer(int fromId, int toId, int amount) {
