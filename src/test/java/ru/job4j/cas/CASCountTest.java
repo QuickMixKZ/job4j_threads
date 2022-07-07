@@ -10,12 +10,12 @@ public class CASCountTest {
     public void whenTwoThreadsIncremented() throws InterruptedException {
         CASCount casCount = new CASCount();
         Thread thread1 = new Thread(() -> {
-            for (int i = 0; i < 64; i++) {
+            for (int i = 0; i < 100; i++) {
                 casCount.increment();
             }
         });
         Thread thread2 = new Thread(() -> {
-            for (int i = 0; i < 64; i++) {
+            for (int i = 0; i < 100; i++) {
                 casCount.increment();
             }
         });
@@ -23,7 +23,7 @@ public class CASCountTest {
         thread2.start();
         thread1.join();
         thread2.join();
-        assertEquals(128, casCount.get());
+        assertEquals(200, casCount.get());
     }
 
 }
